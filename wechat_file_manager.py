@@ -8,6 +8,20 @@ from datetime import datetime
 import sqlite3
 from typing import List, Tuple
 from tqdm import tqdm  # Add this import at the top
+import argparse
+
+def wfm_init():
+    """Initialize WeChat File Manager folders and configuration"""
+    default_config_path = Path(__file__).parent / 'config.yaml'
+    config_path = Path.home() / 'config_wechat_file_manager.yaml'
+    
+    if not config_path.exists():
+        shutil.copy2(default_config_path, config_path)
+        print(f"Created configuration file at: {config_path}")
+    
+    # Load config to create storage directory
+    with open(config_path, 'r') as f:
+        config = yaml.safe_load(f)
 
 class WeChatFileManager:
     """
@@ -176,15 +190,21 @@ class WeChatFileManager:
         return hashlib.md5(file_path.read_bytes()).hexdigest()
 
 def main():
-    config_path = Path.home() / 'config_wechat_file_manager.yaml'
-    if not config_path.exists():
-        default_config_path = Path(__file__).parent / 'config.yaml'
-        shutil.copy2(default_config_path, config_path)
-        print(f"Created default config at: {config_path}")
+    parser = argparse.ArgumentParser(description='WeChat File Manager')
+    parser.add_argument('command', choices=['init', 'run'], help='Command to execute')
+    args = parser.parse_args()
     
-    manager = WeChatFileManager(config_path)
-    manager.process_files()
-    manager.update_last_run()
+    if args.command == 'init':
+        wfm_init()
+    elif args.command == 'run':
+        config_path = Path.home() / 'config_wechat_file_manager.yaml'
+        if not config_path.exists():
+            print("Configuration not found. Please run 'wfm init' first.")
+            return
+        
+        manager = WeChatFileManager(config_path)
+        manager.process_files()
+        manager.update_last_run()
 
 if __name__ == "__main__":
     main()
