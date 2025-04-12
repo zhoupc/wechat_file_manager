@@ -14,6 +14,7 @@
 
 ```bash
 pip install git+https://github.com/zhoupc/wechat_file_manager.git
+```
 
 ## 使用方法
 1. 运行 `wfm init` 命令初始化配置文件
