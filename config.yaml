@@ -1,0 +1,17 @@
+paths:
+  storage: ~/Documents/WeChatStorage
+  wechat: ~/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/cbff6dbadbdf84e918bfcc7477c75023/Message/MessageTemp/
+settings:
+  min_file_size: 1
+  preserve_originals: false
+  skip_patterns:
+  - pic_thumb
+  - video_thumb
+  - .DS_Store
+  target_folders:
+  - Audio
+  - File
+  - Image
+  - Video
+state:
+  last_run: '2020-00-00T00:00:00.000000'
