@@ -39,3 +39,6 @@ state:
 ```
 
 2. 运行 `wfm run` 命令开始文件管理
+
+## 联系
+zhoupc1988@gmail.com
