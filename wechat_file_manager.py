@@ -165,6 +165,8 @@ class WeChatFileManager:
                         else:
                             clean_name = self.clean_filename(file_path.name, file_hash)
                             new_path = storage_target_dir / clean_name
+                            # print the new file path 
+                            print(f"Added: {new_path}")
                             if self.preserve_originals:
                                 shutil.copy2(str(file_path), str(new_path))
                             else:
